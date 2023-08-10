@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+
+  if book
+    h2 Are you sure you want to delete the book: #{book.title}?
+    p This will also delete the following book instances:
+    ul
+      each book_instance in book_instances
+        li= book_instance.title
+
+    form(action=`/catalog/book/${book.id}/delete`, method='POST')
+      input(type='hidden', name='bookid', value=book.id)
+      button(type='submit') Delete Book
+  else
+    p Book not found.
+

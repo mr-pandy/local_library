@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+
+  if book_instance
+    h2 Are you sure you want to delete the book instance: #{book_instance.book.title}?
+    
+    form(action=`/catalog/bookinstance/${book_instance.id}/delete`, method='POST')
+      input(type='hidden', name='bookinstanceid', value=book_instance.id)
+      button(type='submit', class='btn btn-danger') Delete Book Instance
+      a.btn.btn-secondary(href='/catalog/bookinstances') Cancel
+  else
+    p Book instance not found.

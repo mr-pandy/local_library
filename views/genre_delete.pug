@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+
+  if genre
+    h2 Are you sure you want to delete the genre: #{genre.name}?
+    p This will also delete the following books associated with the genre:
+    ul
+      each book in genre_books
+        li
+          a(href=book.url)= book.title
+          p= book.summary
+
+    form(action=`/catalog/genre/${genre.id}/delete`, method='POST')
+      input(type='hidden', name='genreid', value=genre.id)
+      button(type='submit', class='btn btn-danger') Delete Genre
+      a.btn.btn-secondary(href='/catalog/genres') Cancel
+  else
+    p Genre not found.

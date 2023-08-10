@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-md-8.offset-md-2
+        h1 Update Author: #{author.name}
+
+        form(method='POST', action=`/catalog/author/${author._id}/update`)
+          .form-group
+            label(for='first_name') First Name:
+            input#first_name.form-control(type='text', name='first_name', value=author.first_name, required)
+
+          .form-group
+            label(for='family_name') Family Name:
+            input#family_name.form-control(type='text', name='family_name', value=author.family_name, required)
+
+          .form-group
+            label(for='date_of_birth') Date of Birth:
+            input#date_of_birth.form-control(type='date', name='date_of_birth', value=author.formattedDate.DOB, required)
+
+          .form-group
+            label(for='date_of_death') Date of Death:
+            input#date_of_death.form-control(type='date', name='date_of_death', value=author.formattedDate.DOD)
+
+          button.btn.btn-primary(type='submit') Update

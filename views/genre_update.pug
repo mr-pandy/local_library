@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-md-8.offset-md-2
+        h1 Update Genre: #{genre.name}
+
+        form(method='POST', action=`/catalog/genre/${genre._id}/update`)
+          .form-group
+            label(for='name') Name:
+            input#name.form-control(type='text', name='name', value=genre.name, required)
+
+          h4 Books with this Genre:
+          if genre_books.length > 0
+            ul
+              each book in genre_books
+                li
+                  a(href=book.url) #{book.title}
+          else
+            p No books with this Genre.
+
+          button.btn.btn-primary(type='submit') Update

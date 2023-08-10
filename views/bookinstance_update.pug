@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1= title
+
+  if book_instance
+    form(action=`/catalog/bookinstance/${book_instance._id}/update`, method='POST')
+      .form-group
+        label(for='book') Book:
+        select.form-control(name='book', id='book', required)
+          each bk in book
+            option(value=bk._id, selected=(bk._id.toString() === book_instance.book._id.toString()))= bk.title
+
+      .form-group
+        label(for='imprint') Imprint:
+        input.form-control(type='text', name='imprint', id='imprint', value=book_instance.imprint, required)
+
+      .form-group
+        label(for='status') Status:
+        select.form-control(name='status', id='status', required)
+          option(value='Available', selected=(book_instance.status === 'Available')) Available
+          option(value='Maintenance', selected=(book_instance.status === 'Maintenance')) Maintenance
+          option(value='Loaned', selected=(book_instance.status === 'Loaned')) Loaned
+          option(value='Reserved', selected=(book_instance.status === 'Reserved')) Reserved
+
+      .form-group
+        label(for='due_back') Due back:
+        input.form-control(type='date', name='due_back', id='due_back', value=(book_instance.due_back ? book_instance.due_back.toISOString().split('T')[0] : ''), required)
+
+      button.btn.btn-primary(type='submit') Update Book Instance
+      a.btn.btn-secondary(href='/catalog/bookinstances') Cancel
+  else
+    p Book instance not found.
