@@ -3,10 +3,8 @@ const Author = require("../models/author");
 const Genre = require("../models/genre");
 const BookInstance = require("../models/bookinstance");
 const asyncHandler = require("express-async-handler");
-const { main } = require("../models/learningMongoose");
 const { body, validationResult } = require("express-validator");
 
-main();
 //Homepage
 exports.index = asyncHandler(async (req, res, next) => {
   const [

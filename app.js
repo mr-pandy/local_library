@@ -1,3 +1,4 @@
+require('dotenv').config()
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
@@ -7,6 +8,11 @@ const logger = require("morgan");
 const indexRouter = require("./routes/index");
 
 const catalogRouter = require("./routes/catalog");
+const main = require('./dbConfig/dbConfig');
+const connectToDatabase = require('./dbConfig/dbConfig');
+
+// Connect to Database
+connectToDatabase()
 
 const app = express();
 
@@ -19,6 +25,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+
 
 // All routes
 app.use("/", indexRouter);

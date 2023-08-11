@@ -24,8 +24,7 @@ if (userArgs.length !== 1) {
   process.exit(1);
 }
 
-const mongoDB = process.env.MONGODB_URI;
-
+const mongoDB = userArgs[0];
 
 main().catch((err) => console.log(err));
 
@@ -47,9 +46,6 @@ async function main() {
     console.error("Error connecting to MongoDB:", error);
   }
 }
-
-
-
 
 // We pass the index to the ...Create functions so that, for example,
 // genre[0] will always be the Fantasy genre, regardless of the order
